@@ -1,4 +1,4 @@
-# Daktari Sheba bot
+# Doc_anonymiser
 
 # steps to run?
 ### STEPS:
@@ -6,16 +6,16 @@
 Clone the repository
 
 ```bash
-git clone https://github.com/rafid4507/Daktari_Sheba_AI.git
+git clone https://github.com/rafid4507/doc_anonymiser.git
 ```
 ### STEP 01- Create a conda environment after opening the repository
 
 ```bash
-conda create -n shebabot python=3.10 -y
+conda create -n doc_anonymiser python=3.10 -y
 ```
 
 ```bash
-conda activate shebabot
+conda activate doc_anonymiser
 ```
 
 
