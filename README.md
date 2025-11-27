@@ -6,20 +6,19 @@ This document outlines the core steps and dependencies required to build a robus
 
 ## Project Directory Structure
 
+```bash
 doc_anonymiser/
 ├── setup.py
 ├── requirement.txt
 ├── README.md
 ├── anonymizer.py # The main application logic
 └── redacted_output/ # Output folder for final PDFs and temp images
+```
 
 
+### Dependencies
 
----
-
-## Dependencies
-
-To support the conditional hybrid workflow (using PyMuPDF for native PDFs and OCR for scanned PDFs), install the following Python libraries in your `doc_anonymiser` Conda environment:
+To support the conditional hybrid workflow (using PyMuPDF for native PDFs and OCR for scanned PDFs), installing the following Python libraries in `doc_anonymiser` Conda environment:
 
 ### PDF and Image Handling
 
@@ -42,7 +41,7 @@ The hybrid workflow requires the following external command-line utilities:
 
 ```
 
-# Core Application Workflow
+### Core Application Workflow
 
 | Step | Component(s) | Function  |
 | ------- | ------- | -------- |
