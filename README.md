@@ -1,4 +1,4 @@
-# Daktari Sheba bot
+# Document anonymizer
 
 # steps to run?
 ### STEPS:
