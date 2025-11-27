@@ -1,130 +1,39 @@
-# Doc_anonymiser
+# Document Anonymiser Project Plan
 
-# steps to run?
-### STEPS:
+This document outlines the core steps and dependencies required to build the document anonymiser using LLM and OpenCV.
 
-Clone the repository
+# Dependencies
+Before running the application, install the following core Python libraries in doc_anonymiser Conda environment:
 
-```bash
-git clone https://github.com/rafid4507/doc_anonymiser.git
-```
-### STEP 01- Create a conda environment after opening the repository
+### Install core libraries
+pip install opencv-python pillow
 
-```bash
-conda create -n doc_anonymiser python=3.10 -y
-```
+### Install PDF handling (requires Poppler installed on your system)
+pip install pdf2image
 
-```bash
-conda activate doc_anonymiser
-```
+### Install Tesseract wrapper (requires Tesseract-OCR installed on your system)
+pip install pytesseract
 
-
-### STEP 02- we need to install the requirements
-```bash
-pip install -r requirements.txt
-```
+### Install Google GenAI SDK for LLM interaction
+pip install google-genai
 
 
-### Creating a `.env` file in the root directory and add Pinecone & openai credentials as follows:
+Note: pdf2image requires the external utility Poppler, and pytesseract requires the external utility Tesseract-OCR. These usually need to be installed separately based on your operating system (Windows, macOS, or Linux).
 
-```ini
-PINECONE_API_KEY = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-OPENAI_API_KEY = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-```
+# Core Application Workflow
 
 
-```bash
-# to store pdf as embeddings to pinecone fron data folder
-python store_index.py
-```
-
-```bash
-# to chech the chatbot run the following command
-python app.py
-```
-
-Now,
-```bash
-open up localhost:
-```
+| Step | Component(s) | Function |
+|------|--------------|----------|
+| 1 | Load & Convert<br>pdf2image, PIL | Loads the input file. If PDF, converts pages to images. |
+| 2 | OCR Extraction<br>pytesseract | Extracts text and, crucially, the bounding box coordinates for every word on the image. |
+| 3 | LLM Analysis<br>google-genai (Gemini API) | Sends the extracted text to the LLM with a System Instruction to identify PII. The LLM must return a structured JSON list of the PII words/phrases. |
+| 4 | Redaction<br>opencv-python | Uses the LLM's PII list to find the corresponding bounding boxes (from Step 2) and draws solid black rectangles over those areas. |
+| 5 | Save Output<br>PIL, pdf2image | Saves the redacted image or converts the set of redacted images back into a new PDF. |
 
 
-### Techstack I Used to build Daktari Sheba bot:
-
-- Python
-- LangChain
-- Flask
-- gpt-40-mini
-- Pinecone
-
-
-
-# To create AWS CICD Deployment with Github, this is the Documentation from aws
-
-## 1. Login to AWS console.
-
-## 2. Create IAM user for deployment
-
-	#with specific access
-
-	1. EC2 access : It is virtual machine
-
-	2. ECR: Elastic Container registry to save your docker image in aws
-
-
-	#Description: About the deployment
-
-	1. Build docker image of the source code
-
-	2. Push your docker image to ECR
-
-	3. Launch Your EC2 
-
-	4. Pull Your image from ECR in EC2
-
-	5. Lauch your docker image in EC2
-
-	#Policy:
-
-	1. AmazonEC2ContainerRegistryFullAccess
-
-	2. AmazonEC2FullAccess
-
-	
-## 3. Create ECR repo to store/save docker image
-    - Save the URI: 315865595366.dkr.ecr.us-east-1.amazonaws.com/medicalbot
-
-	
-## 4. Create EC2 machine (Ubuntu) 
-
-## 5. Open EC2 and Install docker in EC2 Machine:
-	
-	
-	#optinal
-
-	sudo apt-get update -y
-
-	sudo apt-get upgrade
-	
-	#required
-
-	curl -fsSL https://get.docker.com -o get-docker.sh
-
-	sudo sh get-docker.sh
-
-	sudo usermod -aG docker ubuntu
-
-	newgrp docker
-	
-# 6. Configure EC2 as self-hosted runner:
-    setting>actions>runner>new self hosted runner> choose os> then run command one by one
-
-
-# 7. Setup github secrets:
-
-   - AWS_ACCESS_KEY_ID
-   - AWS_SECRET_ACCESS_KEY
-   - AWS_DEFAULT_REGION
-   - ECR_REPO
-   - PINECONE_API_KEY
-   - OPENAI_API_KEY
+# Next Steps
+1. Set up the Conda environment (as described above).
+2. Install the required Python dependencies.
+3. Write the core logic following the structure in anonymizer.py.
+4. Implement the function that handles the API call and forces structured JSON output.
