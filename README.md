@@ -39,6 +39,7 @@ The hybrid workflow requires the following external command-line utilities:
 - Poppler — required by pdf2image to convert PDF pages to images
 - Tesseract-OCR — required by pytesseract to perform OCR with bounding boxes
 
+---
 
 # Core Application Workflow
 
