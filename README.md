@@ -22,6 +22,7 @@ doc_anonymiser/
 To support the conditional hybrid workflow (using PyMuPDF for native PDFs and OCR for scanned PDFs), install the following Python libraries in your `doc_anonymiser` Conda environment:
 
 ### PDF and Image Handling
+
 ```bash
 pip install PyMuPDF         # For native PDF text/coordinate extraction and final PDF redaction
 pip install pdf2image       # For converting scanned PDF pages to images
@@ -39,7 +40,7 @@ The hybrid workflow requires the following external command-line utilities:
 - Poppler — required by pdf2image to convert PDF pages to images
 - Tesseract-OCR — required by pytesseract to perform OCR with bounding boxes
 
----
+```
 
 # Core Application Workflow
 
