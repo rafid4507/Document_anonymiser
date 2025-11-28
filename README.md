@@ -1,6 +1,8 @@
 # Document Anonymiser Project Plan: Hybrid Workflow
 
-This document outlines the core steps and dependencies required to build a robust document anonymiser that can handle both native (text-copyable) and scanned (image-only) PDF files.
+This document outlines the core steps and dependencies required to build a robust document anonymiser that can handle both:
+- native (text-copyable),
+- scanned (image-only) PDF files.
 
 ---
 
@@ -9,6 +11,7 @@ This document outlines the core steps and dependencies required to build a robus
 ```bash
 doc_anonymiser/
 ├── setup.py
+├── data/     
 ├── requirement.txt
 ├── README.md
 ├── anonymizer.py # The main application logic
