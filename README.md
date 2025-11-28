@@ -11,8 +11,8 @@ This document outlines the core steps and dependencies required to build a robus
 ```bash
 doc_anonymiser/
 ├── setup.py
-├── data/
-├── redacted_output/
+├── data/ # pdf to process
+├── redacted_output/ # anonymized pdf
 ├── requirement.txt
 ├── README.md
 ├── anonymizer.py # The main application logic
@@ -36,7 +36,7 @@ pip install pytesseract     # For OCR and coordinate extraction on scanned image
 pip install opencv-python   # For drawing redaction boxes on scanned images
 
 ### LLM Interaction
-pip install google-genai    # For communication with the Gemini API
+pip install openai    # For communication with the Gemini API
 
 # System Requirements
 The hybrid workflow requires the following external command-line utilities:
@@ -51,7 +51,7 @@ The hybrid workflow requires the following external command-line utilities:
 | ------- | ------- | -------- |
 | **1. Load & Check Type**  | PyMuPDF | Loads the PDF and checks if word-level text extraction is possible.   |
 | **2. Coordinate & Text Extraction** | **IF Native:** PyMuPDF<br>**IF Scanned:** pdf2image, pytesseract | Native: Extracts word-level text + bounding boxes. Scanned: Converts PDF→image and performs OCR to get text + coordinates. |
-| **3. LLM Analysis**   | google-genai (Gemini API)  | Sends extracted text to LLM with System Instruction + JSON Schema to identify PII.  |
+| **3. LLM Analysis**   | gpt-4o-mini  | Sends extracted text to LLM with System Instruction + JSON Schema to identify PII.  |
 | **4. Redaction** | **IF Native:** PyMuPDF<br>**IF Scanned:** opencv-python  | Native: Applies redaction boxes directly to PDF. Scanned: Draws black rectangles on images.  |
 | **5. Save Output**  | PyMuPDF, PIL | Saves final redacted PDF (native or reassembled from images). |
 
