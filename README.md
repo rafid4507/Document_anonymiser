@@ -15,10 +15,16 @@ doc_anonymiser/
 ├── redacted_output/ # anonymized pdf
 ├── requirement.txt
 ├── README.md
+├── .env
 ├── anonymizer.py # The main application logic
 └── redacted_output/ # Output folder for final PDFs and temp images
 ```
+### Create environment 
 
+1. create a file in root folder name .env and provide api key like this:
+    OPENROUTER_API_KEY = "sk-or- ..."
+2. install requirements.txt
+3. currently I am working on trails/trail_01.ipynb file
 
 ### Dependencies
 
