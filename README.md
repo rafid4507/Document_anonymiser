@@ -11,7 +11,8 @@ This document outlines the core steps and dependencies required to build a robus
 ```bash
 doc_anonymiser/
 ├── setup.py
-├── data/     
+├── data/
+├── redacted_output/
 ├── requirement.txt
 ├── README.md
 ├── anonymizer.py # The main application logic
