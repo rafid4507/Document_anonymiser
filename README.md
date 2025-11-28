@@ -55,6 +55,14 @@ The hybrid workflow requires the following external command-line utilities:
 | **5. Save Output**  | PyMuPDF, PIL | Saves final redacted PDF (native or reassembled from images). |
 
 
+# Critical Considerations
+
+| Consideration | Rationale |
+| ---- | ---- |
+| Coordinate System Normalization | OCR data and PDF coordinates often use different origins (top-left vs. bottom-left) and scale (pixels vs. PDF points). Ensure a consistent conversion factor (related to the DPI used in Step 1) is applied when mapping between OCR coordinates and any underlying PDF structure |
+| OCR Confidence Threshold | Filter out words with very low confidence scores (e.g., below 70%) during Step 2. This prevents the LLM from being distracted by gibberish text and reduces the risk of false positives |
+| LLM Prompt Context | When sending text to the LLM (Step 3), ensure the prompt makes it clear that the text might contain OCR errors. This helps the LLM recognize PII even if a character is slightly corrupted | 
+| Multi-Word PII | Implement robust logic in Step 4 to accurately combine the bounding boxes of multi-word entities (like "Ms. Penelope Cruz") into one seamless redaction box, instead of multiple small boxes |
 
 
 This document outlines the core steps and dependencies required to build the document anonymiser using LLM and OpenCV
